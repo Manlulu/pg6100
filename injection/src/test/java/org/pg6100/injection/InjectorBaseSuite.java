@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNull;
 public abstract class InjectorBaseSuite {
 
     /**
-     * Method used by all subclasses test suites to specify which injector they are testing
+     * Method used by all subclass test suites to specify which injector they are testing
      */
     protected abstract Injector getInjector();
 
