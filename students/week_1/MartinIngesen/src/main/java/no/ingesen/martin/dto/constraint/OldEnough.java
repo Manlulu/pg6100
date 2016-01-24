@@ -7,6 +7,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/*
+    AA: correct. However, as the term "OldEnough" might be ambiguous, could
+    had been best to add a short JavaDoc comment like:
+
+    Check if a customer was at least 18 years old when registered
+ */
+
 @Constraint(validatedBy = OldEnoughValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

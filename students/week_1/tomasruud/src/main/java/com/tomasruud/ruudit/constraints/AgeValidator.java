@@ -48,6 +48,10 @@ public class AgeValidator implements ConstraintValidator<Age, Customer> {
         return date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
     }
 
+    /*
+        AA: unused private methods should be removed
+     */
+
     private String accessor( String property ) {
 
         return "get" + Character.toUpperCase( property.charAt( 0 ) ) + property.substring( 1 );

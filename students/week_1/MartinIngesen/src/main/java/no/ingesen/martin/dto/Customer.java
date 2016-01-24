@@ -9,6 +9,20 @@ import javax.validation.constraints.*;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
+/*
+    AA: for names of the queries, you might want to have something like
+
+    public static final ALL_NORWEGIAN_QUERY = "Customer.allNorwegian"
+
+    and then
+
+     @NamedQuery(name = Customer.ALL_NORWEGIAN_QUERY, ...
+
+     this to avoid copy&paste strings in the users of this class, eg see CustomerIT.
+     This would had been marked down as a "maintainability" error
+ */
+
+
 @Entity
 @NamedQueries({
     @NamedQuery(name ="Customer.allNorwegian", query="SELECT c FROM Customer c WHERE c.address.country = 'Norway'"),

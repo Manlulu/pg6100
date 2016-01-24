@@ -9,12 +9,29 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+/*
+    AA: for names of the queries, you might want to have something like
+
+    public static final ALL_NORWEGIAN_QUERY = "Customer.allNorwegian"
+
+    and then
+
+     @NamedQuery(name = Customer.ALL_NORWEGIAN_QUERY, ...
+
+     this to avoid copy&paste strings in the users of this class, eg see CustomerIT.
+     This would had been marked down as a "maintainability" error
+ */
+
 /**
  * @author Tomas Ruud
  * @since 18.01.2016
  */
 @Entity
 @NamedQueries( {
+        /*
+            AA: "c.address.state = null" is incorrect, as using "null" as default for "Norway"
+            makes the code very brittle
+         */
         @NamedQuery( name = "allNorwegian", query = "SELECT c FROM Customer c WHERE c.address.state = null" ),
         @NamedQuery( name = "allFromOslo", query = "SELECT c FROM Customer c WHERE c.address.city = 'Oslo'" )
 } )

@@ -8,8 +8,16 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class OldEnoughValidator implements ConstraintValidator<OldEnough, Customer> {
+
+    /*
+        AA: all overridden methods should be marked with @Override.
+        Not a huge problem when implementing an interface like here, but
+        would have definitively marked it down if it was extending a class
+     */
+
     public void initialize(OldEnough constraintAnnotation) {
     }
+
 
     public boolean isValid(Customer customer, ConstraintValidatorContext context) {
         if(customer.getDateOfBirth() == null) return false;

@@ -1,3 +1,13 @@
+
+/*
+    AA: tests for a class org.foo.X should be in the same package as X,
+    eg org.foo.XTest.
+
+    Why? not only easier to find and better organization, but also then
+    the unit tests would be able to call protected/package level methods in X
+ */
+
+
 import no.ingesen.martin.dto.Address;
 import no.ingesen.martin.dto.Customer;
 import org.junit.After;
