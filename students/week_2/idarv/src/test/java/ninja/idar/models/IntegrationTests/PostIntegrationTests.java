@@ -1,5 +1,6 @@
 package ninja.idar.models.IntegrationTests;
 
+import ninja.idar.models.Post;
 import ninja.idar.models.User;
 import org.junit.After;
 import org.junit.Before;
@@ -12,18 +13,18 @@ import javax.persistence.Persistence;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Idar Vassdal on 18.01.2016.
+ * Created by Idar Vassdal on 25.01.2016.
  */
-public class UserIntegrationTests {
+public class PostIntegrationTests {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-    private User user;
+    private Post post;
 
     @Before
     public void setUp() throws Exception {
         entityManagerFactory = Persistence.createEntityManagerFactory("TestPersistenceUnit");
         entityManager = entityManagerFactory.createEntityManager();
-        user = new User();
+        post = new Post();
     }
 
     @After
@@ -33,7 +34,8 @@ public class UserIntegrationTests {
     }
 
     @Test
-    public void testEmptyUser() throws Exception {
+    public void testEmptyPost() throws Exception {
         assertEquals(1, 1);
+
     }
 }

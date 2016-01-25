@@ -77,11 +77,15 @@ public class UserValidationTests {
 
         user.setPassword("password");
         validations = validator.validate(user);
-        assertEquals("Password must be at least 6 characters long", 1, validations.size());
+        assertEquals("Password must have a symbol or number", 1, validations.size());
 
-        user.setPassword("testmail@mail.com");
+        user.setPassword("password1");
         validations = validator.validate(user);
-        assertEquals("testmail@mailm.com should pass as a legal email", 0, validations.size());
+        assertEquals("password1 should pass as a password", 0, validations.size());
+
+        user.setPassword("password_");
+        validations = validator.validate(user);
+        assertEquals("password_ should pass as a password", 0, validations.size());
     }
 
 

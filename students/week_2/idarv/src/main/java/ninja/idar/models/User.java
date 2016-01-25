@@ -1,6 +1,9 @@
 package ninja.idar.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -10,6 +13,10 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int Id;
+
     @NotNull
     private String username;
 
