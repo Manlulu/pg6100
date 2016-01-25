@@ -28,96 +28,96 @@ public class CustomerValidationTests {
     public void setUp() throws Exception {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
+        customer = getCustomCustomer();
     }
 
     @After
     public void tearDown() throws Exception {
-
+        validatorFactory.close();
     }
 
     @Test
     public void testEmptyCustomer() throws Exception {
         customer = new Customer();
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("4 fields should be @NotNull", 4, validations.size());
     }
 
     @Test
     public void testFullCustomer() throws Exception {
-        customer = getCustomCustomer();
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("With all fields correctly filled out, no validations should be validated", 0, validations.size());
     }
 
     @Test
     public void testNullFirstName() throws Exception {
-        customer = getCustomCustomer();
         customer.setFirstName(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("First name can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullMiddleName() throws Exception {
-        customer = getCustomCustomer();
         customer.setMiddleName(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("Middle name can  be null, which will not invalidate it", 0, validations.size());
     }
 
     @Test
     public void testNullSurName() throws Exception {
-        customer = getCustomCustomer();
         customer.setSurName(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("Surname can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullDOB() throws Exception {
-        customer = getCustomCustomer();
         customer.setDateOfBirth(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("Date of Birth can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullDOR() throws Exception {
-        customer = getCustomCustomer();
         customer.setDateOfRegistration(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("Date of Registration can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullState() throws Exception {
-        customer = getCustomCustomer();
         Address address = customer.getAddress();
         address.setState(null);
         customer.setAddress(address);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("An addresses state can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullCity() throws Exception {
-        customer = getCustomCustomer();
         customer.getAddress().setCity(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("An addresses city can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testNullStreet() throws Exception {
-        customer = getCustomCustomer();
         customer.getAddress().setStreet(null);
+
         Set<ConstraintViolation<Customer>> validations = validator.validate(customer);
         assertEquals("An addresses street can not be null, which will invalidate it", 1, validations.size());
     }
 
     @Test
     public void testAgeValidation() throws Exception{
-        customer = getCustomCustomer();
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.add( Calendar.YEAR, -18 );
         customer.setDateOfBirth(calendarDate.getTime());
@@ -142,7 +142,7 @@ public class CustomerValidationTests {
 
     /**
      *
-     * @return valid object of Customer class
+     * @return a valid Customer object
      */
     private Customer getCustomCustomer(){
         Calendar calendarDate = Calendar.getInstance();
