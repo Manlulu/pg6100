@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int ID;
 
     @NotNull
