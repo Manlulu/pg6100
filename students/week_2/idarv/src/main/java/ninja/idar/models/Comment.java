@@ -17,7 +17,7 @@ public class Comment {
     private int id;
 
     @NotNull
-    @Size(min=2)
+    @Size(min=3, max = 1000)
     private String contents;
 
     public Comment() {

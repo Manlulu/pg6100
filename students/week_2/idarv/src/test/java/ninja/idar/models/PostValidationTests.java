@@ -2,16 +2,13 @@ package ninja.idar.models;
 
 import helpers.GenericBeanTestValidationHelper;
 import helpers.StringHelper;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Idar Vassdal on 18.01.2016.
@@ -43,7 +40,7 @@ public class PostValidationTests extends GenericBeanTestValidationHelper<Post> {
 
     @Test
     public void testLegalPost() throws Exception {
-        assertFalse("Legal post should have no validations", isValid(post));
+        assertTrue("Legal post should have no validations", isValid(post));
     }
 
     @Test

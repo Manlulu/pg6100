@@ -1,6 +1,7 @@
 package ninja.idar.models;
 
 import helpers.GenericBeanTestValidationHelper;
+import helpers.StringHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +14,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class CommentValidationTest extends GenericBeanTestValidationHelper<Comment> {
     private Comment comment;
+    private StringHelper stringHelper;
 
     @Before
     public void setUp() throws Exception {
+        stringHelper = new StringHelper();
         comment = new Comment("comment");
     }
 
@@ -33,5 +36,15 @@ public class CommentValidationTest extends GenericBeanTestValidationHelper<Comme
     @Test
     public void testLegalComment() throws Exception {
         assertTrue("Legal object should be valid", isValid(comment));
+    }
+
+    @Test
+    public void testCommentContentsValidation() throws Exception {
+        comment.setContents(stringHelper.buildStringOfLength(2));
+        assertFalse("comment min length cap should be exceeded", isValidProperty(comment, "contents"));
+
+        comment.setContents(stringHelper.buildStringOfLength(1001));
+        assertFalse("comment length cap should not be exceeded", isValidProperty(comment, "contents"));
+
     }
 }
