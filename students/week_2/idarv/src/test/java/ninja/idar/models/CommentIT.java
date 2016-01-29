@@ -1,6 +1,5 @@
 package ninja.idar.models;
 
-import ninja.idar.models.Comment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

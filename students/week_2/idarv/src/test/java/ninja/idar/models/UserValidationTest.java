@@ -1,94 +1,69 @@
 package ninja.idar.models;
 
-import helper.GenericBeanTestValidationHelper;
-import org.junit.After;
+import helpers.GenericBeanTestValidationHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class UserValidationTest extends GenericBeanTestValidationHelper<User>{
-    private ValidatorFactory validatorFactory;
-    private Validator validator;
-    private Set<ConstraintViolation<User>> validations;
+public class UserValidationTest extends GenericBeanTestValidationHelper<User> {
     private User user;
 
     @Before
     public void setUp() throws Exception {
-        validatorFactory = Validation.buildDefaultValidatorFactory();
-        validator = validatorFactory.getValidator();
         initLegalUser();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        validatorFactory.close();
+    @AfterClass
+    public static void afterTests() throws Exception {
+        closeValidationFactory();
     }
 
     @Test
     public void testEmptyUser() throws Exception {
         user = new User();
-        validations = validator.validate(user);
-        assertEquals("empty user should have 3 validations", 3, validations.size());
+        assertFalse("Empty user should not be valid", isValid(user));
     }
 
     @Test
     public void testLegalUser() throws Exception {
-//        Set<ConstraintViolation<User>> validations = validator.validate(user);
-//        assertEquals("Legal user should have no validations", 0, validations.size());
-        assertTrue(isValid(user));
+        assertTrue("Legal user should have no validations", isValid(user));
     }
 
     @Test
     public void testEmailValidation() throws Exception {
-        Set<ConstraintViolation<User>> validations;
-
         user.setEmail(null);
-        validations = validator.validate(user);
-        assertEquals("User email cannot be null", 1, validations.size());
+        assertFalse("User email cannot be null", isValidProperty(user, "email"));
 
         user.setEmail("email");
-        validations = validator.validate(user);
-        assertEquals("User email must follow email pattern", 1, validations.size());
+        assertFalse("User email must follow email pattern", isValidProperty(user, "email"));
 
         user.setEmail("testmail@mail.com");
-        validations = validator.validate(user);
-        assertEquals("testmail@mailm.com should pass as a legal email", 0, validations.size());
+        assertTrue("testmail@mailm.com should pass as a legal email", isValidProperty(user, "email"));
     }
 
     @Test
     public void testPasswordValidation() throws Exception {
-        Set<ConstraintViolation<User>> validations;
 
         user.setPassword(null);
-        validations = validator.validate(user);
-        assertEquals("User email cannot be null", 1, validations.size());
+        assertFalse("User email cannot be null", isValidProperty(user, "password"));
 
         user.setPassword("pass1");
-        validations = validator.validate(user);
-        assertEquals("Password must be at least 6 characters long", 1, validations.size());
+        assertFalse("Password must be at least 6 characters long", isValidProperty(user, "password"));
 
         user.setPassword("password");
-        validations = validator.validate(user);
-        assertEquals("Password must have a symbol or number", 1, validations.size());
+        assertFalse("Password must have a symbol or number", isValidProperty(user, "password"));
 
         user.setPassword("password1");
-        validations = validator.validate(user);
-        assertEquals("password1 should pass as a password", 0, validations.size());
+        assertTrue("password1 should pass as a password", isValidProperty(user, "password"));
 
         user.setPassword("password_");
-        validations = validator.validate(user);
-        assertEquals("password_ should pass as a password", 0, validations.size());
+        assertTrue("password_ should pass as a password", isValidProperty(user, "password"));
     }
 
 

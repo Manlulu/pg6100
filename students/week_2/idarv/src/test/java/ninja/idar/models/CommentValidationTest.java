@@ -1,44 +1,37 @@
 package ninja.idar.models;
 
-import ninja.idar.models.Comment;
+import helpers.GenericBeanTestValidationHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Idar Vassdal on 29.01.2016.
  */
-public class CommentValidationTest {
-    private ValidatorFactory validatorFactory;
-    private Validator validator;
-    private Set<ConstraintViolation<Comment>> validations;
+public class CommentValidationTest extends GenericBeanTestValidationHelper<Comment> {
     private Comment comment;
 
     @Before
     public void setUp() throws Exception {
-        validatorFactory = Validation.buildDefaultValidatorFactory();
-        validator = validatorFactory.getValidator();
         comment = new Comment("comment");
-        validations = null; // reset for each
+    }
+
+    @AfterClass
+    public static void afterTests() throws Exception {
+        closeValidationFactory();
     }
 
     @Test
     public void testEmptyComment() throws Exception {
         comment = new Comment();
-        validations = validator.validate(comment);
-        assertEquals("empty comment should have 1 violation", 1, validations.size());
+        assertFalse("Empty comment object is not valid", isValid(comment));
     }
 
     @Test
     public void testLegalComment() throws Exception {
-        validations = validator.validate(comment);
-        assertEquals("Legal comment should have no violation", 0, validations.size());
+        assertTrue("Legal object should be valid", isValid(comment));
     }
 }
