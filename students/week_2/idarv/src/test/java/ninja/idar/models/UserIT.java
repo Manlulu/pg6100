@@ -1,4 +1,4 @@
-package ninja.idar.models.IntegrationTests;
+package ninja.idar.models;
 
 import ninja.idar.models.User;
 import org.junit.After;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class UserIntegrationTests {
+public class UserIT {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
     private User user;
@@ -35,5 +35,6 @@ public class UserIntegrationTests {
     @Test
     public void testEmptyUser() throws Exception {
         assertEquals(1, 1);
+
     }
 }

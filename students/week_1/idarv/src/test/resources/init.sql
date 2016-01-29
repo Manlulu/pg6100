@@ -4,3 +4,5 @@ INSERT INTO Customer (customerID, firstName, middleName, surName, dateOfBirth, d
 INSERT INTO Customer (customerID, firstName, middleName, surName, dateOfBirth, dateOfRegistration, country, state, city, street) VALUES (1003, 'Fredrick', 'Freddyboi', 'Biering', '2015-12-05 12:00:00.000', '2015-12-05 12:00:00.000', 'Norway', 'Oslo', 'Oslo', 'Skippergata 1a');
 INSERT INTO Customer (customerID, firstName, middleName, surName, dateOfBirth, dateOfRegistration, country, state, city, street) VALUES (1004, 'Martin', 'H4xXx0r', 'Ingesen', '2015-12-05 12:00:00.000', '2015-12-05 12:00:00.000', 'Norway', 'Akerhus', 'Drammen', 'Drammenselva 12');
 INSERT INTO Customer (customerID, firstName, middleName, surName, dateOfBirth, dateOfRegistration, country, state, city, street) VALUES (1005, 'Jonas', 'Dimitri', 'Jensen', '2015-12-05 12:00:00.000', '2015-12-05 12:00:00.000', 'Russia', 'бабушка', 'холодно', 'улица Водка 45677');
+
+INSERT INTO Comment ()

@@ -1,6 +1,6 @@
-package ninja.idar.models.ValidationTests;
+package ninja.idar.models;
 
-import ninja.idar.models.User;
+import helper.GenericBeanTestValidationHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,13 +12,15 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class UserValidationTests {
+public class UserValidationTest extends GenericBeanTestValidationHelper<User>{
     private ValidatorFactory validatorFactory;
     private Validator validator;
+    private Set<ConstraintViolation<User>> validations;
     private User user;
 
     @Before
@@ -36,14 +38,15 @@ public class UserValidationTests {
     @Test
     public void testEmptyUser() throws Exception {
         user = new User();
-        Set<ConstraintViolation<User>> validations = validator.validate(user);
+        validations = validator.validate(user);
         assertEquals("empty user should have 3 validations", 3, validations.size());
     }
 
     @Test
     public void testLegalUser() throws Exception {
-        Set<ConstraintViolation<User>> validations = validator.validate(user);
-        assertEquals("Legal user should have no validations", 0, validations.size());
+//        Set<ConstraintViolation<User>> validations = validator.validate(user);
+//        assertEquals("Legal user should have no validations", 0, validations.size());
+        assertTrue(isValid(user));
     }
 
     @Test
@@ -89,8 +92,7 @@ public class UserValidationTests {
     }
 
 
-
-    private void initLegalUser(){
+    private void initLegalUser() {
         user = new User("username", "email@email.com", "password_");
     }
 }

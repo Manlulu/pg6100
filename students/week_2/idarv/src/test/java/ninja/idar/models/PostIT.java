@@ -1,4 +1,4 @@
-package ninja.idar.models.IntegrationTests;
+package ninja.idar.models;
 
 import ninja.idar.models.Post;
 import ninja.idar.models.User;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Idar Vassdal on 25.01.2016.
  */
-public class PostIntegrationTests {
+public class PostIT {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
     private Post post;
