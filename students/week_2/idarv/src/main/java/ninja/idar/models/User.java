@@ -1,9 +1,6 @@
 package ninja.idar.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -12,7 +9,12 @@ import javax.validation.constraints.Pattern;
  * regex is
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(query = "Select e from User e", name = "allUsers"),
+})
 public class User {
+    public static final String USERS_ALL = "allUsers";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int Id;
@@ -38,6 +40,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getUsername() {

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int ID;
+    private int id;
 
     @NotNull
     @Size(min = 5, max = 30)
@@ -32,12 +32,12 @@ public class Post {
         this.contents = contents;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int ID) {
+        this.id = ID;
     }
 
     public String getTitle() {
