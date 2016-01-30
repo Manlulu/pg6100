@@ -1,6 +1,6 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestIntegrationTestHelper;
+import helpers.GenericBeanIntegrationTestHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,14 +8,13 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by Idar Vassdal on 29.01.2016.
  */
-public class CommentIT extends GenericBeanTestIntegrationTestHelper<Comment> {
+public class CommentIT extends GenericBeanIntegrationTestHelper<Comment> {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager persister;
     private Comment comment;

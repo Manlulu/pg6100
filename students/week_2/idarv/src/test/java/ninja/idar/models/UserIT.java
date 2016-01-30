@@ -1,21 +1,8 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestIntegrationTestHelper;
-import ninja.idar.models.Post;
-import ninja.idar.models.User;
-import org.junit.After;
+import helpers.GenericBeanIntegrationTestHelper;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-
-import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -24,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class UserIT extends GenericBeanTestIntegrationTestHelper<User> {
+public class UserIT extends GenericBeanIntegrationTestHelper<User> {
     private User user;
 
 //    @Before

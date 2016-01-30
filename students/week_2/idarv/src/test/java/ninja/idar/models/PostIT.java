@@ -1,16 +1,9 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestIntegrationTestHelper;
-import ninja.idar.models.Post;
-import ninja.idar.models.User;
-import org.junit.After;
+import helpers.GenericBeanIntegrationTestHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 25.01.2016.
  */
-public class PostIT extends GenericBeanTestIntegrationTestHelper<Post> {
+public class PostIT extends GenericBeanIntegrationTestHelper<Post> {
     private Post post;
 
     @Before

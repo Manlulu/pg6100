@@ -1,6 +1,6 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestValidationHelper;
+import helpers.GenericBeanValidationTestHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class UserValidationTest extends GenericBeanTestValidationHelper<User> {
+public class UserValidationTest extends GenericBeanValidationTestHelper<User> {
     private User user;
 
     @Before
