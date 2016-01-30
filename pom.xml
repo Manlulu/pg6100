@@ -13,6 +13,7 @@
     <module>multithreading</module>
     <module>ejb</module>
     <module>security</module>
+    <module>jta</module>
   </modules>
 
 

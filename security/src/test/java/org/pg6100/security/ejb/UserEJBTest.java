@@ -21,7 +21,7 @@ public class UserEJBTest {
     @BeforeClass
     public static void initContainer() throws Exception {
         Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File[]{new File("target/test-classes"), new File("target/classes")});
+        properties.put(EJBContainer.MODULES,  new File("target/classes"));
         ec = EJBContainer.createEJBContainer(properties);
         ctx = ec.getContext();
 
