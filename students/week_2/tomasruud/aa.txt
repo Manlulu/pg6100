@@ -1,0 +1,9 @@
+AA:
+
+-  @Ignore
+   @Test
+   public void removeRemovesEntity() throws Exception {
+
+   in UserRepositoryIT. Good! If you have a bug, do have a test
+   to show it and help debugging
+
