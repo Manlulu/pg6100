@@ -8,27 +8,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Created by Idar Vassdal on 25.01.2016.
+ * Created by Idar Vassdal on 29.01.2016.
  */
 @Entity
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @NotNull
-    @Size(min = 5, max = 30)
-    private String title;
-
-    @NotNull
-    @Size(min = 20, max = 1000)
+    @Size(min=3, max = 1000)
     private String contents;
 
-    public Post() {
+    public Comment() {
     }
 
-    public Post(String title, String contents) {
-        this.title = title;
+    public Comment(String contents) {
         this.contents = contents;
     }
 
@@ -36,16 +31,8 @@ public class Post {
         return id;
     }
 
-    public void setId(int ID) {
-        this.id = ID;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getContents() {

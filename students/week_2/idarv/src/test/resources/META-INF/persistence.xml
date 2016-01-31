@@ -6,6 +6,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ninja.idar.models.User</class>
         <class>ninja.idar.models.Post</class>
+        <class>ninja.idar.models.Comment</class>
+        <class>ninja.idar.models.Vote</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:jpa-named-queries;"/>
