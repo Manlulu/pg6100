@@ -7,6 +7,8 @@ public class StringHelper {
     public static final String DEFAULT_TEST_USERNAME = "SuperUserName";
     public static final String DEFAULT_TEST_EMAIL = "SuperUser@email.com";
     public static final String DEFAULT_TEST_PASSWORD = "_!superUser33Password";
+    public static final String DEFAULT_TEST_CONTENTS = "Super default contents that will amaze you";
+    public static final String DEFAULT_TEST_TITLE = "Clever clickbait";
 
     /**
      * Builds a string of n length characters

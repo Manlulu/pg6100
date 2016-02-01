@@ -1,9 +1,6 @@
 package ninja.idar.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,7 +8,12 @@ import javax.validation.constraints.Size;
  * Created by Idar Vassdal on 25.01.2016.
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(query = "SELECT e FROM Post e", name = Post.POST_ALL)
+})
 public class Post {
+    public static final String POST_ALL = "allPosts";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;

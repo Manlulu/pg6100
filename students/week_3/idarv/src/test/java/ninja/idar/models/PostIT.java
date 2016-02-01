@@ -32,7 +32,8 @@ public class PostIT extends GenericBeanIntegrationTestHelper<Post> {
 
     @Test
     public void testPostNamedQueries() throws Exception {
-        // NOT IMPLEMENTED
+        assertTrue("GET ALL query should return results because init.sql has run",
+                getPersister().createNamedQuery(Post.POST_ALL).getResultList().size() > 0);
     }
 
     @Test

@@ -1,7 +1,5 @@
 package ninja.idar.service.base;
 
-import ninja.idar.models.User;
-
 import java.util.List;
 
 /**
