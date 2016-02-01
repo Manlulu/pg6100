@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -69,6 +71,7 @@ public class PostValidationTestTests extends GenericBeanValidationTestHelper<Pos
     }
 
     private void initLegalPost(){
-        post = new Post("postTitle", "This is my post and I would like you to read it please");
+        Date date = new Date();
+        post = new Post("postTitle", "This is my post and I would like you to read it please", date);
     }
 }

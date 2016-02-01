@@ -4,6 +4,8 @@ import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
 import org.junit.AfterClass;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -25,7 +27,9 @@ public class VoteIT extends GenericBeanIntegrationTestHelper<Vote> {
 
     @Test
     public void testNamedQueries() throws Exception {
-        // Not implemented
+        List<Comment> mostVotedPosts = getPersister().createNamedQuery(Vote.VOTE_MOST_VOTED_COMMENTS, Comment.class).getResultList();
+
+        assertTrue("(VOTE) MOST WANTED POSTS should return results", 0 < mostVotedPosts.size());
     }
 
     @Test

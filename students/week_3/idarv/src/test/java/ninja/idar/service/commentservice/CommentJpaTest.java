@@ -5,7 +5,6 @@ import ninja.idar.helpers.StringHelper;
 import ninja.idar.models.Comment;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.PortableInterceptor.NON_EXISTENT;
 
 import static org.junit.Assert.*;
 
@@ -77,5 +76,10 @@ public class CommentJpaTest extends GenericBeanIntegrationTestHelper<Comment>{
         commentJpa.close();
         assertFalse("After closing, persister should not be open", getPersister().isOpen());
 
+    }
+
+    @Test
+    public void testGetVotes() throws Exception {
+        assertEquals("comment 1001 should have total of 3 score", 3, commentJpa.getVotes(1001));
     }
 }

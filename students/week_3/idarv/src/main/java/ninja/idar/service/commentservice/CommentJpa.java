@@ -1,6 +1,7 @@
 package ninja.idar.service.commentservice;
 
 import ninja.idar.models.Comment;
+import ninja.idar.models.Vote;
 import ninja.idar.service.base.BaseDao;
 
 import javax.persistence.EntityManager;
@@ -49,6 +50,11 @@ public class CommentJpa implements BaseDao<Comment>, CommentDao {
     @Override
     public void persist(Comment entity) {
         persister.persist(entity);
+    }
+
+    @Override
+    public int getVotes(int commentId) {
+        return ((Long) persister.createNamedQuery(Vote.VOTE_SUM_VOTES_OF_POST).setParameter("commentId", commentId).getResultList().get(0)).intValue();
     }
 
     @Override

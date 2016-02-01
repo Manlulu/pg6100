@@ -43,4 +43,12 @@ public class Comment {
     public void setContents(String contents) {
         this.contents = contents;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", contents='" + contents + '\'' +
+                '}';
+    }
 }

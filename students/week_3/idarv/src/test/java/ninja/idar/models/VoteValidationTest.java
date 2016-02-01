@@ -4,6 +4,8 @@ import ninja.idar.helpers.GenericBeanValidationTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -31,15 +33,16 @@ public class VoteValidationTest extends GenericBeanValidationTestHelper<Vote> {
 
     @Test
     public void testNoteValidations() throws Exception {
+        Date date  = new Date();
         vote.setComment(null);
         vote.setPost(null);
         assertFalse("Without post or comment, vote is not valid", isValid(vote));
 
-        vote.setPost(new Post("postTitle", "postContents"));
+        vote.setPost(new Post("postTitle", "postContents", date));
         assertTrue("With post set, vote is valid", isValid(vote));
 
         vote.setComment(new Comment("comment"));
-        vote.setPost(new Post("postTitle", "postContents"));
+        vote.setPost(new Post("postTitle", "postContents", date));
         assertFalse("With both a comment and a post, vote is not valid", isValid(vote));
     }
 

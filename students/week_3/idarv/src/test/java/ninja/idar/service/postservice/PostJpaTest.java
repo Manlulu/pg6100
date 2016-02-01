@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -64,7 +66,8 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
 
     @Test
     public void testPersistPost() throws Exception {
-        Post post = new Post(StringHelper.DEFAULT_TEST_TITLE, StringHelper.DEFAULT_TEST_CONTENTS);
+        Date date = new Date();
+        Post post = new Post(StringHelper.DEFAULT_TEST_TITLE, StringHelper.DEFAULT_TEST_CONTENTS, date);
         assertFalse("Post should not have id prior to persisting", 0 < post.getId());
         postJPA.persist(post);
         assertTrue("Post should not have id post persisting", 0 < post.getId());
