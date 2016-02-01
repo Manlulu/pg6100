@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(query = "Select e from User e", name = "allUsers"),
+        @NamedQuery(query = "Select e from User e", name = User.USERS_ALL),
 })
 public class User {
     public static final String USERS_ALL = "allUsers";
@@ -40,6 +40,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        setId(0);
     }
 
     public int getId() {
