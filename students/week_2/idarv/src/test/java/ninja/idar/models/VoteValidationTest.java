@@ -1,6 +1,6 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestValidationHelper;
+import helpers.GenericBeanValidationTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,14 +10,13 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 29.01.2016.
  */
-public class VoteValidationTest extends GenericBeanTestValidationHelper<Vote> {
+public class VoteValidationTest extends GenericBeanValidationTestHelper<Vote> {
     private Vote vote;
 
     @Before
     public void setUp() throws Exception {
         initLegalVote();
     }
-
 
     @Test
     public void testEmptyVote() throws Exception {

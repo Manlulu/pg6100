@@ -5,12 +5,18 @@ package helpers;
  */
 public class StringHelper {
 
-    public String buildStringOfLength(int length) {
-        String string = "";
-        for(int i = 0; i < length; i++){
-            string += 'a';
+    /**
+     * Builds a string of n length characters
+     * @param n length of string
+     * @return String of length n
+     */
+    public String buildStringOfLength(int n) {
+        String s = "";
+
+        for(int i = 0; i < n; i++){
+            s += 'a';
         }
 
-        return string;
+        return s;
     }
 }

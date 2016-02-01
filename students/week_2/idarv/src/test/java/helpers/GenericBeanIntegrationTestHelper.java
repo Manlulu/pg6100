@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * Created by Idar Vassdal on 29.01.2016.
  */
-public class GenericBeanTestIntegrationTestHelper<T> {
+public class GenericBeanIntegrationTestHelper<T> {
     private static  EntityManagerFactory entityManagerFactory;
     private static  EntityManager persister;
 
-    public GenericBeanTestIntegrationTestHelper() {
+    public GenericBeanIntegrationTestHelper() {
         entityManagerFactory = Persistence.createEntityManagerFactory("TestPersistenceUnit");
         persister = entityManagerFactory.createEntityManager();
     }

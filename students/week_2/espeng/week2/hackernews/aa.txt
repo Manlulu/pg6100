@@ -1,0 +1,8 @@
+
+AA:
+
+- Do not add "target" or ".idea" to Git. Mark them as "ignore".
+  In IntelliJ, you can use the ".ignore" plugin.
+
+
+- "Improper" use of Mockito (I will add more on this in class)

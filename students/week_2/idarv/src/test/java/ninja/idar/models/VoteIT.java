@@ -1,6 +1,6 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestIntegrationTestHelper;
+import helpers.GenericBeanIntegrationTestHelper;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 29.01.2016.
  */
-public class VoteIT extends GenericBeanTestIntegrationTestHelper<Vote> {
+public class VoteIT extends GenericBeanIntegrationTestHelper<Vote> {
     private Vote vote;
 
     @AfterClass
