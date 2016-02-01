@@ -16,7 +16,7 @@ public class VoteValidator implements ConstraintValidator<ValidVote, Vote> {
     }
 
     /**
-     * Post or comment has to be set, but the other has to be null
+     * Post or comment has to be set, but only one of them. The remaining has to be NULL
      * @param vote
      * @param context
      * @return

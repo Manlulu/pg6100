@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.pg6100</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.1-SNAPHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
 

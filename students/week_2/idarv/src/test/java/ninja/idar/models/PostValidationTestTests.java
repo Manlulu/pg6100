@@ -1,6 +1,6 @@
 package ninja.idar.models;
 
-import helpers.GenericBeanTestValidationHelper;
+import helpers.GenericBeanValidationTestHelper;
 import helpers.StringHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Idar Vassdal on 18.01.2016.
  */
-public class PostValidationTests extends GenericBeanTestValidationHelper<Post> {
+public class PostValidationTestTests extends GenericBeanValidationTestHelper<Post> {
     private static StringHelper stringHelper;
     private Post post;
 
