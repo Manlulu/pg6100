@@ -13,6 +13,7 @@ INSERT INTO Post (id, title, contents) VALUES (1004, 'title04', 'contents with t
 INSERT INTO Comment (id, contents) VALUES (1001, 'some great comment');
 INSERT INTO Comment (id, contents) VALUES (1002, 'another great comment');
 INSERT INTO Comment (id, contents) VALUES (1003, 'a third great comment');
+INSERT INTO Comment (id, contents) VALUES (1004, 'a fourth even greater comment');
 
 -- (id integer not null, vote boolean not null, COMMENT_ID integer, POST_ID integer, USER_ID integer not null, primary key (id))
 INSERT INTO Vote (id, vote, COMMENT_ID, POST_ID, USER_ID) VALUES (1001, 1, 1001, NULL , 1002);

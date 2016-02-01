@@ -36,4 +36,10 @@ public class CommentIT extends GenericBeanIntegrationTestHelper<Comment> {
     public void testLoadsInitScript() throws Exception {
         assertTrue("init.sql should populate comments in the database", isTablePopulated("Comment"));
     }
+
+    @Test
+    public void testPostNamedQueries() throws Exception {
+        assertTrue("GET ALL query should return results because init.sql has run",
+                getPersister().createNamedQuery(Comment.COMMENT_ALL).getResultList().size() > 0);
+    }
 }
