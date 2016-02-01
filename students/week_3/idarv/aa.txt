@@ -1,0 +1,17 @@
+AA:
+
+- Why "init.sql" under "src/main" ? Testing stuff should be under "src/test".
+
+- Missing EJB classes
+
+- @Entity
+  @NamedQueries({
+          @NamedQuery(query = "Select e from User e", name = "allUsers"),
+  })
+  public class User {
+     public static final String USERS_ALL = "allUsers";
+
+
+
+
+- "helpers" package should be under same root of the other classes, for example "ninja.idar.test.helpers"
