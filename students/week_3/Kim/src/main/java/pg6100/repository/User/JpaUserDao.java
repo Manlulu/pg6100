@@ -39,12 +39,8 @@ public class JpaUserDao {
             return null;
         }
 
-        System.out.println();
-
-
         String salt = getSalt();
         user.setSalt(salt);
-
 
         String hash = computeHash(password, user.getSalt());
         user.setHash(hash);
@@ -139,8 +135,7 @@ public class JpaUserDao {
                the length of the password.
          */
 
-//        String hash = DigestUtils.sha256Hex(combined);    // Couldnt find sha256Hex
-        String hash = new String(Hex.encodeHex(DigestUtils.md5(combined)));
+        String hash = DigestUtils.sha256Hex(combined);
 
         return hash;
     }
