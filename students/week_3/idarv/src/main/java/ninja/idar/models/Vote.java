@@ -11,10 +11,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 @ValidVote
 @NamedQueries({
+        @NamedQuery(query = "SELECT e FROM Vote e", name = Vote.VOTE_ALL),
         @NamedQuery(query = "SELECT comment FROM Vote e WHERE COMMENT_ID IS NOT NULL GROUP BY COMMENT_ID ORDER BY SUM(vote) DESC",name = Vote.VOTE_MOST_VOTED_COMMENTS),
         @NamedQuery(query = "SELECT SUM(vote) FROM Vote e WHERE COMMENT_ID LIKE :commentId", name = Vote.VOTE_SUM_VOTES_OF_POST)
 })
 public class Vote {
+    public static final String VOTE_ALL = "voteAll";
     public static final String VOTE_MOST_VOTED_COMMENTS = "voteMostVotedPost";
     public static final String VOTE_SUM_VOTES_OF_POST = "voteSumVotesOfPost";
     public static final int VOTE_UP = 1;

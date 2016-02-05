@@ -8,6 +8,7 @@ import ninja.idar.models.Vote;
  * Created by Idar Vassdal on 05.02.2016.
  */
 public class VoteTestHelper {
+    public static final int EXISTING_VOTE_ID = 1001;
 
     public static Vote getLegalVote() {
         Post votePost = PostTestHelper.getLegalPost();

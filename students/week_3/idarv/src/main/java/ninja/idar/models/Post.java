@@ -13,9 +13,11 @@ import java.time.LocalDateTime;
 @Entity
 @NamedQueries({
         @NamedQuery(query = "SELECT e FROM Post e", name = Post.POST_ALL),
-        @NamedQuery(query = "SELECT e FROM Post e ORDER BY publishedDate DESC", name = Post.POST_ALL_BY_DATE)
+        @NamedQuery(query = "SELECT e FROM Post e ORDER BY publishedDate DESC", name = Post.POST_ALL_BY_DATE),
+        @NamedQuery(query = "SELECT COUNT(*) FROM Post", name = Post.POST_ALL_COUNT)
 })
 public class Post {
+    public static final String POST_ALL_COUNT = "allPostsCount";
     public static final String POST_ALL = "allPosts";
     public static final String POST_ALL_BY_DATE = "allPostsByDate";
 

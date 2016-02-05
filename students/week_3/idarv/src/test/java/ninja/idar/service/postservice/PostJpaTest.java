@@ -12,53 +12,53 @@ import static org.junit.Assert.*;
  * Created by Idar Vassdal on 01.02.2016.
  */
 public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
-    private PostJPA postJPA;
+    private PostJpa postJpa;
     private static final int EXISTING_POST_ID = 1001;
     private static final int NON_EXISTING_POST_ID = 654321;
 
     @Before
     public void setUp() throws Exception {
-        postJPA = new PostJPA(getPersister());
+        postJpa = new PostJpa(getPersister());
     }
 
     @Test
     public void testGetPosts() throws Exception {
-        assertTrue("init.sql should populate users", 0 < postJPA.getAll().size());
+        assertTrue("init.sql should populate users", 0 < postJpa.getAll().size());
     }
 
     @Test
     public void testGetPostById() throws Exception {
-        assertNull("Post with id " + NON_EXISTING_POST_ID + " should not exist from init.sql", postJPA.getById(NON_EXISTING_POST_ID));
-        assertNotNull("Post with id " + EXISTING_POST_ID + " should exist from init.sql", postJPA.getById(EXISTING_POST_ID));
+        assertNull("Post with id " + NON_EXISTING_POST_ID + " should not exist from init.sql", postJpa.getById(NON_EXISTING_POST_ID));
+        assertNotNull("Post with id " + EXISTING_POST_ID + " should exist from init.sql", postJpa.getById(EXISTING_POST_ID));
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Post post = postJPA.getById(EXISTING_POST_ID);
+        Post post = postJpa.getById(EXISTING_POST_ID);
         String newContents = "new test contents from the test itself";
 
         assertNotEquals("Post should not have contents newContents by default", newContents, post.getContents());
 
         post.setContents(newContents);
-        postJPA.update(post);
+        postJpa.update(post);
 
-        post = postJPA.getById(EXISTING_POST_ID);
+        post = postJpa.getById(EXISTING_POST_ID);
         assertEquals("Post should have contents newContents after update", newContents, post.getContents());
     }
 
     @Test
     public void testDeletePostById() throws Exception {
-        assertNotEquals("Post should exist before deletion", null, postJPA.getById(EXISTING_POST_ID));
-        postJPA.deleteById(EXISTING_POST_ID);
-        assertEquals("Post should not exist after deletion", null, postJPA.getById(EXISTING_POST_ID));
+        assertNotEquals("Post should exist before deletion", null, postJpa.getById(EXISTING_POST_ID));
+        postJpa.deleteById(EXISTING_POST_ID);
+        assertEquals("Post should not exist after deletion", null, postJpa.getById(EXISTING_POST_ID));
     }
 
     @Test
     public void testDeletePostByObject() throws Exception {
-        Post post = postJPA.getById(EXISTING_POST_ID);
-        assertNotEquals("Post should exist before deletion", null, postJPA.getById(post.getId()));
-        postJPA.deleteByObject(post);
-        assertEquals("Post should not exist after deletion", null, postJPA.getById(post.getId()));
+        Post post = postJpa.getById(EXISTING_POST_ID);
+        assertNotEquals("Post should exist before deletion", null, postJpa.getById(post.getId()));
+        postJpa.deleteByObject(post);
+        assertEquals("Post should not exist after deletion", null, postJpa.getById(post.getId()));
     }
 
     @Test
@@ -66,15 +66,33 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
         Post post = PostTestHelper.getLegalPost();
 
         assertFalse("Post should not have id prior to persisting", 0 < post.getId());
-        postJPA.persist(post);
+        postJpa.persist(post);
         assertTrue("Post should not have id post persisting", 0 < post.getId());
     }
 
     @Test
     public void testClose() throws Exception {
         assertTrue("Before closing, persister should be open", getPersister().isOpen());
-        postJPA.close();
+        postJpa.close();
         assertFalse("After closing, persister should not be open", getPersister().isOpen());
 
+    }
+
+    @Test
+    public void testPostUpdate() throws Exception {
+        Post post = getPersister().createNamedQuery(Post.POST_ALL, Post.class).getResultList().get(0);
+        int postID = post.getId();
+        String newTitle = "This is a new title for this post";
+        post.setTitle(newTitle);
+        postJpa.update(post);
+        post = postJpa.getById(postID);
+        assertEquals("post should have persisted new title in update", newTitle, post.getTitle());
+    }
+
+    @Test
+    public void testGetTodaysPosts() throws Exception {
+        assertFalse("No post should be posted as of today in init.sql", 0 < postJpa.getTodaysPosts().size());
+        postJpa.persist(PostTestHelper.getLegalPost());
+        assertTrue("After persisting a new post, todays post should contain a result", 0 < postJpa.getTodaysPosts().size());
     }
 }

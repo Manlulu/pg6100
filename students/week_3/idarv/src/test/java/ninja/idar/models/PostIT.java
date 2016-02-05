@@ -1,5 +1,6 @@
 package ninja.idar.models;
 
+import javafx.geometry.Pos;
 import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
 import ninja.idar.helpers.PostTestHelper;
 import org.junit.AfterClass;
@@ -52,6 +53,8 @@ public class PostIT extends GenericBeanIntegrationTestHelper<Post> {
                 postDate =  p.getPublishedDate();
             }
         }
+
+        assertTrue("COUNT ALL should return more than zero, because init.sql has run", 0 < getPersister().createNamedQuery(Post.POST_ALL_COUNT, Long.class).getSingleResult());
     }
 
     @Test
@@ -62,4 +65,5 @@ public class PostIT extends GenericBeanIntegrationTestHelper<Post> {
         persistEntity(post);
         assertTrue(post.getId() > 0);
     }
+
 }
