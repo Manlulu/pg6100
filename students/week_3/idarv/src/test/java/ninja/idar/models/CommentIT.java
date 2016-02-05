@@ -17,13 +17,11 @@ import static junit.framework.TestCase.assertTrue;
 public class CommentIT extends GenericBeanIntegrationTestHelper<Comment> {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager persister;
-    private Comment comment;
 
     @Before
     public void setUp() throws Exception {
         entityManagerFactory = Persistence.createEntityManagerFactory("TestPersistenceUnit");
         persister = entityManagerFactory.createEntityManager();
-        comment = new Comment();
     }
 
     @After

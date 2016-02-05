@@ -1,9 +1,11 @@
 package ninja.idar.models;
 
+import ninja.idar.constraints.converters.LocalDateAttributeConverter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by Idar Vassdal on 25.01.2016.
@@ -30,13 +32,14 @@ public class Post {
     private String contents;
 
     @NotNull(message = "Post need a published date")
-    private Date publishedDate;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    private LocalDateTime publishedDate;
 
 
     public Post() {
     }
 
-    public Post(String title, String contents, Date publishedDate) {
+    public Post(String title, String contents, LocalDateTime publishedDate) {
         this.title = title;
         this.contents = contents;
         this.publishedDate = publishedDate;
@@ -66,11 +69,11 @@ public class Post {
         this.contents = contents;
     }
 
-    public Date getPublishedDate() {
+    public LocalDateTime getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(LocalDateTime publishedDate) {
         this.publishedDate = publishedDate;
     }
 

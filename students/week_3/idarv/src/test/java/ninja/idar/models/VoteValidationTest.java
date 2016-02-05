@@ -1,6 +1,7 @@
 package ninja.idar.models;
 
 import ninja.idar.helpers.GenericBeanValidationTestHelper;
+import ninja.idar.helpers.PostTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,16 +34,15 @@ public class VoteValidationTest extends GenericBeanValidationTestHelper<Vote> {
 
     @Test
     public void testNoteValidations() throws Exception {
-        Date date  = new Date();
         vote.setComment(null);
         vote.setPost(null);
         assertFalse("Without post or comment, vote is not valid", isValid(vote));
 
-        vote.setPost(new Post("postTitle", "postContents", date));
+        vote.setPost(PostTestHelper.getLegalPost());
         assertTrue("With post set, vote is valid", isValid(vote));
 
         vote.setComment(new Comment("comment"));
-        vote.setPost(new Post("postTitle", "postContents", date));
+        vote.setPost(PostTestHelper.getLegalPost());
         assertFalse("With both a comment and a post, vote is not valid", isValid(vote));
     }
 

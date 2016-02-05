@@ -3,6 +3,7 @@ package ninja.idar.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 /**
  * Created by Idar Vassdal on 29.01.2016.
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 })
 public class Comment {
     public static final String COMMENT_ALL = "allComments";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
@@ -20,6 +22,7 @@ public class Comment {
     @NotNull
     @Size(min=3, max = 1000)
     private String contents;
+
 
     public Comment() {
     }

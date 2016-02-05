@@ -1,6 +1,7 @@
 package ninja.idar.models;
 
 import ninja.idar.helpers.GenericBeanValidationTestHelper;
+import ninja.idar.helpers.PostTestHelper;
 import ninja.idar.helpers.StringHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class PostValidationTestTests extends GenericBeanValidationTestHelper<Pos
 
     @Before
     public void setUp() throws Exception {
-        initLegalPost();
+        post = PostTestHelper.getLegalPost();
     }
 
     @AfterClass
@@ -68,10 +69,5 @@ public class PostValidationTestTests extends GenericBeanValidationTestHelper<Pos
         post.setTitle(shortTitle);
         assertFalse("title min cap should be exceeded", isValidProperty(post, "title"));
 
-    }
-
-    private void initLegalPost(){
-        Date date = new Date();
-        post = new Post("postTitle", "This is my post and I would like you to read it please", date);
     }
 }

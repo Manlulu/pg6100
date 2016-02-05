@@ -1,13 +1,10 @@
 package ninja.idar.service.postservice;
 
 import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
-import ninja.idar.helpers.StringHelper;
+import ninja.idar.helpers.PostTestHelper;
 import ninja.idar.models.Post;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -66,8 +63,8 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
 
     @Test
     public void testPersistPost() throws Exception {
-        Date date = new Date();
-        Post post = new Post(StringHelper.DEFAULT_TEST_TITLE, StringHelper.DEFAULT_TEST_CONTENTS, date);
+        Post post = PostTestHelper.getLegalPost();
+
         assertFalse("Post should not have id prior to persisting", 0 < post.getId());
         postJPA.persist(post);
         assertTrue("Post should not have id post persisting", 0 < post.getId());
