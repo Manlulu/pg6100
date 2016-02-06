@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Idar Vassdal on 05.02.2016.
  */
-public class VoteJpa implements BaseDao<Vote>{
+public class VoteJpa implements BaseDao<Vote>, VoteDao{
     private EntityManagerFactory entityManagerFactory;
     private EntityManager persister;
 

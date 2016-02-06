@@ -4,7 +4,11 @@ import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
 import ninja.idar.helpers.PostTestHelper;
 import ninja.idar.models.Post;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import static org.junit.Assert.*;
 
@@ -49,6 +53,7 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
     @Test
     public void testDeletePostById() throws Exception {
         assertNotEquals("Post should exist before deletion", null, postJpa.getById(EXISTING_POST_ID));
+
         postJpa.deleteById(EXISTING_POST_ID);
         assertEquals("Post should not exist after deletion", null, postJpa.getById(EXISTING_POST_ID));
     }
@@ -56,6 +61,7 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
     @Test
     public void testDeletePostByObject() throws Exception {
         Post post = postJpa.getById(EXISTING_POST_ID);
+
         assertNotEquals("Post should exist before deletion", null, postJpa.getById(post.getId()));
         postJpa.deleteByObject(post);
         assertEquals("Post should not exist after deletion", null, postJpa.getById(post.getId()));
@@ -75,7 +81,6 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
         assertTrue("Before closing, persister should be open", getPersister().isOpen());
         postJpa.close();
         assertFalse("After closing, persister should not be open", getPersister().isOpen());
-
     }
 
     @Test
@@ -83,16 +88,23 @@ public class PostJpaTest extends GenericBeanIntegrationTestHelper<Post>{
         Post post = getPersister().createNamedQuery(Post.POST_ALL, Post.class).getResultList().get(0);
         int postID = post.getId();
         String newTitle = "This is a new title for this post";
+
         post.setTitle(newTitle);
         postJpa.update(post);
         post = postJpa.getById(postID);
+
         assertEquals("post should have persisted new title in update", newTitle, post.getTitle());
     }
 
     @Test
     public void testGetTodaysPosts() throws Exception {
         assertFalse("No post should be posted as of today in init.sql", 0 < postJpa.getTodaysPosts().size());
-        postJpa.persist(PostTestHelper.getLegalPost());
+        Post p = PostTestHelper.getLegalPost();
+        getPersister().getTransaction().begin();
+
+        postJpa.persist(p);
+
         assertTrue("After persisting a new post, todays post should contain a result", 0 < postJpa.getTodaysPosts().size());
+        getPersister().getTransaction().rollback();
     }
 }
