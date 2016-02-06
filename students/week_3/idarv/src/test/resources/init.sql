@@ -1,9 +1,9 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
-INSERT INTO User (id, username, email, password) VALUES(1001, 'user01', 'user01@email.com', 'password_user01_');
-INSERT INTO User (id, username, email, password) VALUES(1002, 'user02', 'user02@email.com', 'password_user02_');
-INSERT INTO User (id, username, email, password) VALUES(1003, 'user03', 'user03@email.com', 'password_user03_');
-INSERT INTO User (id, username, email, password) VALUES(1004, 'user04', 'user04@email.com', 'password_user04_');
+INSERT INTO User (id, username, email, hash, salt) VALUES(1001, 'user01', 'user01@email.com', '0b7d34e578e8a3bbf5ede7bc3660a88e9c21e5d33004e85e983ef731f464771a', '_!dlaoul3u4fs3s56ao07iifrfmq');
+INSERT INTO User (id, username, email, hash, salt) VALUES(1002, 'user02', 'user02@email.com', '0b7d34e578e8a3bbf5ede7bc3660a88e9c21e5d33004e85e983ef731f464771a', '_!dlaoul3u4fs3s56ao07iifrfmq');
+INSERT INTO User (id, username, email, hash, salt) VALUES(1003, 'user03', 'user03@email.com', '0b7d34e578e8a3bbf5ede7bc3660a88e9c21e5d33004e85e983ef731f464771a', '_!dlaoul3u4fs3s56ao07iifrfmq');
+INSERT INTO User (id, username, email, hash, salt) VALUES(1004, 'user04', 'user04@email.com', '0b7d34e578e8a3bbf5ede7bc3660a88e9c21e5d33004e85e983ef731f464771a', '_!dlaoul3u4fs3s56ao07iifrfmq');
 
 INSERT INTO Post (id, title, contents, publishedDate) VALUES (1001, 'title01', 'contents with text of post number 01', '2015-12-05 12:00:00.000');
 INSERT INTO Post (id, title, contents, publishedDate) VALUES (1002, 'title02', 'contents with text of post number 02', '2016-01-05 12:00:00.000');

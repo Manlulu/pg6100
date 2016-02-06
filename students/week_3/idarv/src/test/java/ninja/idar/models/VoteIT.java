@@ -29,7 +29,7 @@ public class VoteIT extends GenericBeanIntegrationTestHelper<Vote> {
     public void testNamedQueries() throws Exception {
         List<Comment> mostVotedPosts = getPersister().createNamedQuery(Vote.VOTE_MOST_VOTED_COMMENTS, Comment.class).getResultList();
 
-        assertTrue("(VOTE) MOST WANTED POSTS should return results", 0 < mostVotedPosts.size());
+        assertTrue("(VOTE) MOST VOTED POSTS should return results", 0 < mostVotedPosts.size());
     }
 
     @Test

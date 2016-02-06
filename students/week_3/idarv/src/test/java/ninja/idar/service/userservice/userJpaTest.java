@@ -2,6 +2,7 @@ package ninja.idar.service.userservice;
 
 import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
 import ninja.idar.helpers.StringHelper;
+import ninja.idar.helpers.UserTestHelper;
 import ninja.idar.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,9 +69,18 @@ public class UserJpaTest extends GenericBeanIntegrationTestHelper<UserJpa> {
 
     @Test
     public void testPersistUser() throws Exception {
-        User u = new User(StringHelper.DEFAULT_TEST_USERNAME, StringHelper.DEFAULT_TEST_EMAIL, StringHelper.DEFAULT_TEST_PASSWORD);
+        User u = UserTestHelper.getLegalUser();
         assertFalse("User should not have id prior to persisting", 0 < u.getId());
         userJpa.persist(u);
+        assertTrue("User should not have id post persisting", 0 < u.getId());
+    }
+
+    @Test
+    public void testPersistWithPassword() throws Exception {
+        User u = UserTestHelper.getLegalUser();
+        String password = UserTestHelper.DEFAULT_TEST_PASSWORD;
+        assertFalse("User should not have id prior to persisting", 0 < u.getId());
+        userJpa.persist(u, password);
         assertTrue("User should not have id post persisting", 0 < u.getId());
     }
 
@@ -80,4 +90,5 @@ public class UserJpaTest extends GenericBeanIntegrationTestHelper<UserJpa> {
         userJpa.close();
         assertFalse("After closing, persister should not be open", getPersister().isOpen());
     }
+
 }

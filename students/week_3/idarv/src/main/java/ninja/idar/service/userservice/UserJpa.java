@@ -12,15 +12,18 @@ import java.util.List;
  * Created by Idar Vassdal on 01.02.2016.
  */
 @Stateless
-public class UserJpa implements BaseDao<User>, UserDao{
+public class UserJpa implements BaseDao<User>, UserDao {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager persister;
+    private PasswordConverter passwordConverter;
 
     public UserJpa() {
+        passwordConverter = new PasswordConverter();
     }
 
     public UserJpa(EntityManager persister) {
         this.persister = persister;
+        passwordConverter = new PasswordConverter();
     }
 
     @Override
@@ -40,16 +43,30 @@ public class UserJpa implements BaseDao<User>, UserDao{
 
     @Override
     public void deleteById(int id) {
-         deleteByObject(getById(id));
+        deleteByObject(getById(id));
     }
 
     @Override
     public void deleteByObject(User user) {
-         persister.remove(user);
+        persister.remove(user);
     }
 
     @Override
-    public void persist(User user) {
+    public void persist(User entity) {
+        persister.persist(entity);
+    }
+
+    @Override
+    public void persist(User user, String password) {
+        if (user == null || password == null) {
+            return;
+        }
+
+        String salt = passwordConverter.generateSalt();
+        String hash = passwordConverter.generateHash(password, salt);
+        user.setSalt(salt);
+        user.setHash(hash);
+
         persister.persist(user);
     }
 

@@ -27,19 +27,26 @@ public class User {
     // http://regexr.com/391t1
     private String email;
 
+//    @NotNull
+//    @Pattern(regexp = "(?=[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z]*([0-9#$-/:-?{-~!\"^_`\\[\\]]))(?=[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z0-9]*[a-zA-Z])[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z0-9]{6,}")
+//    // Source: http://regexr.com/391t1
+//    // Password must be 6 characters and contain at least 1 digit or special character but no spaces.
+//    private String password;
+
     @NotNull
-    @Pattern(regexp = "(?=[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z]*([0-9#$-/:-?{-~!\"^_`\\[\\]]))(?=[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z0-9]*[a-zA-Z])[#$-/:-?{-~!\"^_`\\[\\]a-zA-Z0-9]{6,}")
-    // Source: http://regexr.com/391t1
-    // Password must be 6 characters and contain at least 1 digit or special character but no spaces.
-    private String password;
+    private String hash;
+
+    @NotNull
+    private String salt;
 
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String hash, String salt) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.hash = hash;
+        this.salt = salt;
         setId(0);
     }
 
@@ -67,11 +74,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHash() {
+        return hash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

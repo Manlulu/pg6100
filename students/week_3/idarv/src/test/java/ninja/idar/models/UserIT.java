@@ -1,6 +1,7 @@
 package ninja.idar.models;
 
 import ninja.idar.helpers.GenericBeanIntegrationTestHelper;
+import ninja.idar.helpers.UserTestHelper;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class UserIT extends GenericBeanIntegrationTestHelper<User> {
 
     @Test
     public void testPersist() throws Exception {
-        user = new User("username", "email@email.com", "password_");
+        user = UserTestHelper.getLegalUser();
         assertFalse(user.getId() > 0);
         persistEntity(user);
         assertTrue(user.getId() > 0);

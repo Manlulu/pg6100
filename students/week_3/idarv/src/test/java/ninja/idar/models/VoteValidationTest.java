@@ -2,6 +2,7 @@ package ninja.idar.models;
 
 import ninja.idar.helpers.GenericBeanValidationTestHelper;
 import ninja.idar.helpers.PostTestHelper;
+import ninja.idar.helpers.UserTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,7 +48,7 @@ public class VoteValidationTest extends GenericBeanValidationTestHelper<Vote> {
     }
 
     private void initLegalVote() {
-        User user = new User("username", "email@email.com", "password_");
+        User user = UserTestHelper.getLegalUser();
         Comment comment = new Comment("comment");
         vote = new Vote(user, comment, Vote.VOTE_UP);
     }
