@@ -47,24 +47,4 @@ public class UserValidationTest extends GenericBeanValidationTestHelper<User> {
         user.setEmail("testmail@mail.com");
         assertTrue("testmail@mailm.com should pass as a legal email", isValidProperty(user, "email"));
     }
-
-    // TODO: Remove or fix
-//    @Test
-//    public void testPasswordValidation() throws Exception {
-//
-//        user.setPassword(null);
-//        assertFalse("User email cannot be null", isValidProperty(user, "password"));
-//
-//        user.setPassword("pass1");
-//        assertFalse("Password must be at least 6 characters long", isValidProperty(user, "password"));
-//
-//        user.setPassword("password");
-//        assertFalse("Password must have a symbol or number", isValidProperty(user, "password"));
-//
-//        user.setPassword("password1");
-//        assertTrue("password1 should pass as a password", isValidProperty(user, "password"));
-//
-//        user.setPassword("password_");
-//        assertTrue("password_ should pass as a password", isValidProperty(user, "password"));
-//    }
 }
