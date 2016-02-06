@@ -5,31 +5,34 @@ import ninja.idar.service.base.BaseDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Idar Vassdal on 01.02.2016.
  */
-public class PostJPA implements BaseDao<Post>, PostDao{
+public class PostJpa implements BaseDao<Post>, PostDao{
     private EntityManagerFactory entityManagerFactory;
     private EntityManager persister;
 
-    public PostJPA() {
+    public PostJpa() {
     }
 
-    public PostJPA(EntityManager persister) {
+    public PostJpa(EntityManager persister) {
         this.persister = persister;
     }
 
     @Override
-    public List getAll() {
-        return persister.createNamedQuery(Post.POST_ALL).getResultList();
+    public List<Post> getAll() {
+        return persister.createNamedQuery(Post.POST_ALL, Post.class).getResultList();
     }
 
     @Override
     public Post update(Post entity) {
-        // TODO
-        return null;
+        return persister.merge(entity);
     }
 
     @Override
@@ -55,5 +58,16 @@ public class PostJPA implements BaseDao<Post>, PostDao{
     @Override
     public void close() {
         persister.close();
+    }
+
+    @Override
+    public List getTodaysPosts() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
+        return persister.createNamedQuery(Post.POST_ALL, Post.class).getResultList()
+                .stream()
+                .filter(e -> e.getPublishedDate().getYear() == now.getYear())
+                .filter(e -> e.getPublishedDate().getDayOfYear() == now.getDayOfYear())
+                .filter(e -> e.getPublishedDate().getDayOfYear() == now.getDayOfYear())
+                .collect(Collectors.toList());
     }
 }
