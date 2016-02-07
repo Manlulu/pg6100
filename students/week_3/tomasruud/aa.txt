@@ -1,0 +1,5 @@
+AA:
+
+- same comments as for others: potential issue with manual handling of
+transactions (transaction-type="RESOURCE_LOCAL") and EJB container
+to test EJB classes.

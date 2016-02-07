@@ -1,0 +1,15 @@
+AA:
+
+- why is the entity Comment marked as @Stateless ?
+
+- package names should be lower cases (eg see "Constraints" and "Enum")
+
+- transactions are marked with "transaction-type="RESOURCE_LOCAL"" and not
+with "transaction-type="JTA"". As such, transactions should had done manually
+in all the EJBs. This is done in the tests, but not directly in the EJB.
+However, consequences will be clear once we will also have the web-layer.
+
+
+- Testing of EJB services should be done with a EJB container, so that you can
+ check if transactions are properly handled. Although I realize I should have
+ made it more clear in the exercise text.

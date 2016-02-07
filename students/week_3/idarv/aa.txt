@@ -1,17 +1,20 @@
 AA:
 
-- Why "init.sql" under "src/main" ? Testing stuff should be under "src/test".
 
-- Missing EJB classes
-
-- @Entity
-  @NamedQueries({
-          @NamedQuery(query = "Select e from User e", name = "allUsers"),
-  })
-  public class User {
-     public static final String USERS_ALL = "allUsers";
+- project does not compile due to "PostJpa" name mismatch. Java is case sensitive, and
+ Windows is not. However, this type of issue will be easily spot once
+ we ll discuss continuous integration systems (eg Travis)
 
 
+- Good use of references in LocalDateAttributeConverter
 
 
-- "helpers" package should be under same root of the other classes, for example "ninja.idar.test.helpers"
+- "service"s do not seem to be EJB (@Stateful, @Stateless, @Singleton), but rather
+ classes in which EntityManagers are passed by constructor. This will likely lead to
+ quite a few issues when dealing with actual database, dependency injection and
+ calls from web-layer.
+
+
+- Testing of EJB services should be done with a EJB container, so that you can
+ check if transactions are properly handled. Although I realize I should have
+ made it more clear in the exercise text.
