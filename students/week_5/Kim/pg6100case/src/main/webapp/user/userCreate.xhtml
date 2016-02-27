@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <h1>Create User</h1>
+        <b:row>
+            <b:column span="4">
+                <h:form>
+                    <b:inputText value="#{userController.formUsername}" placeholder="Username" label="Username" />
+                    <b:inputSecret value="#{userController.formPassword}" placeholder="Password" label="Password" />
+                    <b:inputSecret value="#{userController.formPasswordConfirm}" placeholder="Password" label="Confirm password" />
+
+                    <b:commandButton value="Create User" styleClass="btn btn-success"
+                                     type="submit" action="#{userController.createUser()}" />
+                </h:form>
+            </b:column>
+        </b:row>
+    </ui:define>
+</ui:composition>
+</html>

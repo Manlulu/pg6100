@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+
+        <h1>List Users (Debugging)</h1>
+
+        <h:outputText value="The number of users is: #{userController.numberOfUsers} "/>
+
+        <h:dataTable styleClass="table table-striped" var="user" value="#{userController.allUsers}">
+            <h:column>
+                <f:facet name="header">
+                    id
+                </f:facet>
+                <h:outputText value="#{user.userId}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Username
+                </f:facet>
+                <h:outputText value="#{user.userName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Delete user
+                </f:facet>
+                <h:form>
+                    <b:commandButton value="Delete" type="submit" styleClass="btn btn-danger"
+                                     action="#{userController.deleteUser(user)}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+
+    </ui:define>
+</ui:composition>
+</html>
