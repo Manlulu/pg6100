@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html"
+>
+<ui:composition>
+  <b:navBar inverse="true" static="true" fluid="false"
+            brand="Ruudit" fixed="true">
+    <b:navbarLinks pull="left">
+      <b:navLink value="Front page" outcome="/index.xhtml"/>
+    </b:navbarLinks>
+
+
+    <c:if test="#{not sessionController.loggedIn}">
+      <b:navbarLinks pull="right">
+        <b:navLink value="Sign in" outcome="/sessions/new.xhtml"/>
+        <b:navLink value="Register" outcome="/users/new.xhtml"/>
+      </b:navbarLinks>
+
+    </c:if>
+
+    <c:if test="#{sessionController.loggedIn}">
+      <h:form>
+        <b:navbarLinks pull="right">
+          <b:navLink>
+            <p class="navbar-text">Signed in as
+              <em><h:outputText value="#{sessionController.currentUser.username}"/></em>
+            </p>
+          </b:navLink>
+          <b:navCommandLink value="Sign out" action="#{sessionController.destroy}"
+                            style="cursor: pointer"/>
+        </b:navbarLinks>
+      </h:form>
+
+    </c:if>
+  </b:navBar>
+</ui:composition>
+</html>

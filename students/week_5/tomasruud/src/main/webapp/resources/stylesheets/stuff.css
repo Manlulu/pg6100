@@ -1,0 +1,87 @@
+* .post:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.post {
+    padding: 20px 0;
+    width: 100%;
+}
+
+.post-inner {
+    display: block;
+    float: none;
+    clear: both;
+    height: 70px;
+}
+
+.post .index {
+    float: left;
+    margin-right: 20px;
+
+    color: #ccc;
+}
+
+.post .index span {
+    margin-top: 25px;
+    display: block;
+}
+
+.post .votebox {
+    float: left;
+    margin-right: 20px;
+
+    width: 50px;
+
+    text-align: center;
+}
+
+.post .votebox * {
+    color: #aaa;
+}
+
+.post .votebox .up {
+    color: #5cb85c;
+}
+
+.post .votebox .down {
+    color: #d9534f;
+}
+
+.post .votebox .votes {
+    margin: 5px 0;
+}
+
+.post .votebox ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.post .body {
+    font-size: 12px;
+}
+
+.post .body .title {
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+}
+
+.post .body .meta {
+    color: #aaa;
+    padding: 0;
+    margin: 1px 0 0;
+}
+
+.post .body .links {
+    list-style-type: none;
+    display: inline-block;
+    float: left;
+    margin: 0;
+    padding:0;
+}
+
+.post .body .links a {
+    font-weight: bold;
+    color: #999;
+}
