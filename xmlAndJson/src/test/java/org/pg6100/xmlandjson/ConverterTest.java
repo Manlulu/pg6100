@@ -126,20 +126,22 @@ public class ConverterTest {
         Converter<TopPosts> manual = new ConverterImpl(TopPosts.class);
         TopPosts topPosts = getTopPosts();
 
-        String xml = manual.toXML(topPosts);
-        String json = manual.toJSon(topPosts);
+        String mxml = manual.toXML(topPosts);
+        String mjson = manual.toJSon(topPosts);
 
         Converter<org.pg6100.xmlandjson.automated.TopPosts> automated =
                 new ConverterImpl<>(org.pg6100.xmlandjson.automated.TopPosts.class);
 
-        org.pg6100.xmlandjson.automated.TopPosts aTP = automated.fromXML(xml);
+        org.pg6100.xmlandjson.automated.TopPosts aTP = automated.fromXML(mxml);
+        String aXml = automated.toXML(aTP);
         String aJS = automated.toJSon(aTP);
 
+        assertEquals(mxml, aXml);
         /*
             They might or might not be equal. In this particular case, they
             are not, as the Java classes have different fields
          */
-        assertNotEquals(json, aJS);
+        assertNotEquals(mjson, aJS);
     }
 
 
