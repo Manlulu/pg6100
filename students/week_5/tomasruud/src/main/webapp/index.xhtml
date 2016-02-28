@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="templates/layout.xhtml">
+  <ui:define name="pageTitle">/r/all</ui:define>
+  <ui:define name="content">
+    <b:row>
+      <b:column span="8">
+        <c:if test="#{empty postController.allPosts}">
+          <h:outputText value="No posts :("/>
+        </c:if>
+        <c:forEach items="#{postController.allPosts}" var="post" varStatus="loop">
+          <div class="post">
+            <div class="post-inner">
+              <div class="index">
+              <span>
+                <h:outputText value="#{loop.index + 1}"/>
+              </span>
+              </div>
+              <div class="votebox">
+                <h:form>
+                  <ul>
+                    <li>
+                      <h:commandLink
+                          action="#{postController.upvote(post, sessionController.currentUser)}">
+                        <b:icon name="arrow-up"
+                                styleClass="#{postController.userHasUpvoted(post, sessionController.currentUser) ? 'up' : ''}"/>
+                      </h:commandLink>
+                    </li>
+                    <li class="votes">
+                      <h:outputText value="#{post.realVotes}"/>
+                    </li>
+                    <li>
+                      <h:commandLink
+                          action="#{postController.downvote(post, sessionController.currentUser)}">
+                        <b:icon name="arrow-down"
+                                styleClass="#{postController.userHasDownvoted(post, sessionController.currentUser) ? 'down' : ''}"/>
+                      </h:commandLink>
+                    </li>
+                  </ul>
+                </h:form>
+              </div>
+              <div class="body">
+                <h:link value="#{post.title}" styleClass="title"/>
+                <p class="meta">
+                  Posted <h:outputText value="#{post.created}" converter="javax.faces.DateTime"/> by
+                  <h:outputText value="#{post.creator.username}"/>
+                </p>
+                <h:form>
+                  <ul class="links">
+                    <li>
+                      <h:commandLink>
+                        Comments
+                      </h:commandLink>
+                    </li>
+                  </ul>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+      </b:column>
+
+      <c:if test="#{sessionController.loggedIn}">
+        <b:column span="4">
+          <b:panel title="Sidebar">
+            <b:button outcome="/posts/new.xhtml" value="Submit a post" icon="pencil" size="lg"
+                      look="success" styleClass="btn-block"/>
+          </b:panel>
+        </b:column>
+      </c:if>
+    </b:row>
+  </ui:define>
+</ui:composition>
+</html>
