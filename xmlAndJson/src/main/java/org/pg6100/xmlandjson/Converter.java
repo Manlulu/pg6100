@@ -1,14 +1,14 @@
 package org.pg6100.xmlandjson;
 
-import org.pg6100.xmlandjson.data.TopPosts;
+
 
 public interface Converter<T> {
 
-    String toXML(T topPosts);
+    String toXML(T obj);
 
     T fromXML(String xml);
 
-    String toJSon(T topPosts);
+    String toJSon(T obj);
 
     T fromJSon(String json);
 
