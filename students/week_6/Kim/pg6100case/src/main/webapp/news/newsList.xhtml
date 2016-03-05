@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <h1>List News</h1>
+        <p>Bugs: News are created 2 times. News object not validated.</p>
+
+        <h:outputText value="The number of news is: #{newsController.numberOfNews} "/>
+
+        <h:dataTable styleClass="table table-striped" var="news" value="#{newsController.allNews}">
+            <h:column>
+                <f:facet name="header">
+                    id
+                </f:facet>
+                <h:outputText value="#{news.newsId}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Rating
+                </f:facet>
+                <h:form>
+                    <h:commandLink action="#{newsController.upVoteNews(userController.registeredUser, news)}">
+                        <h:graphicImage value="../resources/images/up-arrow.png" width="30" height="30"/>
+                    </h:commandLink>
+                </h:form>
+                <h:outputText value="#{news.rating}"/>
+                <h:form>
+                    <h:commandLink action="#{newsController.downVoteNews(userController.registeredUser, news)}">
+                        <h:graphicImage value="../resources/images/down-arrow.png" width="30" height="30"/>
+                    </h:commandLink>
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Headline
+                </f:facet>
+                <h:outputLink value="newsDetails.jsf">
+                    <f:param name="id" value="#{news.newsId}"/>
+                    <h:outputText value="#{news.name}"/>
+                </h:outputLink>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h:outputText value="#{news.comments.size()} comments"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Date
+                </f:facet>
+                <h:outputText value="#{news.createdAt}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Updated at
+                </f:facet>
+                <h:outputText value="#{news.updatedAt}"/>
+            </h:column>
+        </h:dataTable>
+
+
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+
+<f:metadata>
+    <f:viewParam name="id" value="#{userController.userId}"/>
+    <f:viewAction action="#{userController.initUser()}"/>
+</f:metadata>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+
+        <h1>#{userController.user.userName} details</h1>
+
+        <b:row>
+            <b:column span="4">
+                <h:form>
+                    <!--<li>Headline: <h:outputText value="#{newsController.news.name}"/></li>-->
+                    <h:outputText value="Username: #{userController.user.userName}"/><br></br>
+                    <h:outputText value="First name: #{userController.user.firstName}"/><br></br>
+                    <h:outputText value="Last name: #{userController.user.lastName}"/><br></br>
+
+
+                    <h:outputText value="State: #{userController.user.address.state}"/>
+                    <h:outputText value=": N/A" rendered="#{empty userController.user.address.state}"/><br></br>
+                    <h:outputText value="City: #{userController.user.address.city}"/>
+                    <h:outputText value=": N/A" rendered="#{empty userController.user.address.city}"/><br></br>
+                    <h:outputText value="Street: #{userController.user.address.street}"/>
+                    <h:outputText value=": N/A" rendered="#{empty userController.user.address.street}"/><br></br>
+
+                </h:form>
+
+                <br></br>
+
+                <c:choose>
+                    <c:when test="#{userController.registeredUser.equals(userController.user.userName)}">
+                        <b:button outcome="userEdit" styleClass="btn btn-warning"
+                                  value="Edit">
+                            <f:param name="id" value="#{userController.user.userId}"/>
+                        </b:button>
+                    </c:when>
+                </c:choose>
+
+            </b:column>
+        </b:row>
+
+    </ui:define>
+</ui:composition>
+</html>

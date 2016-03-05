@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{newsController.newsId}"/>
+    <f:viewAction action="#{newsController.initNews()}"/>
+</f:metadata>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+
+        <h1>#{newsController.news.name}</h1>
+        <b:row>
+            <b:column span="4">
+                <h:form>
+                    <!--<li>Headline: <h:outputText value="#{newsController.news.name}"/></li>-->
+                    <h:outputText value="#{newsController.news.article}"/>
+                    <h:outputText value="N/A" rendered="#{empty newsController.news.article}"/> <br></br><br></br>
+                    <h:outputText value="Written by #{newsController.news.user.userName}"/>
+                </h:form>
+
+                <br></br>
+
+                <c:choose>
+                    <c:when test="#{userController.registeredUser.equals(newsController.news.user.userName)}">
+                        <b:button outcome="newsEdit" styleClass="btn btn-warning"
+                                  value="Edit (Bug: Is creating new news)">
+                            <f:param name="id" value="#{newsController.news.newsId}"/>
+                        </b:button>
+                    </c:when>
+                </c:choose>
+
+            </b:column>
+        </b:row>
+        <br></br>
+        <b:row>
+            <b:column>
+
+
+                <c:choose>
+                    <c:when test="#{userController.isLoggedIn()}">
+                        <h:form>
+                            <h:outputText value="Commenting as: #{userController.registeredUser} "/>
+                            <b:inputTextarea placeholder="Comment here..." value="#{newsController.commentBody}"/>
+                            <b:commandButton value="Submit Comment" styleClass="btn btn-success"
+                                             type="submit"
+                                             action="#{newsController.addComment(userController.registeredUser)}"/>
+                        </h:form>
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="Log in to comment"/>
+                        <h:button value="Log In" styleClass="btn btn-success" outcome="/user/userLogin.xhtml"/>
+                    </c:otherwise>
+                </c:choose>
+            </b:column>
+
+
+            <b:column>
+                <h:dataTable styleClass="table table-striped" var="comment" value="#{newsController.news.comments}">
+                    <h:column>
+                        <f:facet name="header">
+                            Comments
+                        </f:facet>
+                        From: <h:outputText value="#{comment.user.userName}"/> <br></br>
+                        <h:outputText value="#{comment.body}"/>
+                    </h:column>
+
+                </h:dataTable>
+            </b:column>
+
+
+        </b:row>
+
+    </ui:define>
+</ui:composition>
+</html>

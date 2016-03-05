@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>PG5100 case</title>
+</h:head>
+
+<h:body>
+
+    <b:navBar brand="PG6100" brandHref="/news/newsList.jsf"> <!--TODO - will fail on local build, but works on remote-->
+        <b:navbarLinks>
+            <b:dropMenu value="Users">
+                <b:navLink value="New user" href="../user/userCreate.jsf"></b:navLink>
+                <b:navLink value="Login" href="../user/userLogin.jsf"></b:navLink>
+                <b:navLink value="User list" href="../user/userList.jsf"></b:navLink>
+            </b:dropMenu>
+            <b:dropMenu value="News">
+                <c:choose>
+                    <c:when test="#{userController.isLoggedIn()}">
+                        <b:navLink value="Create news" href="../news/newsCreate.jsf"></b:navLink>
+                    </c:when>
+                </c:choose>
+                <b:navLink value="Read News" href="../news/newsList.jsf"></b:navLink>
+
+
+            </b:dropMenu>
+        </b:navbarLinks>
+
+
+        <b:navbarLinks pull="right">
+            <h:form>
+                <c:choose>
+                    <c:when test="#{userController.isLoggedIn()}">
+                        <h:outputText value="Logged in as: #{userController.registeredUser} "/>
+                        <b:commandButton value="Log out" type="submit" styleClass="btn btn-danger" action="#{userController.logoutUser()}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="Not logged in  "/>
+                        <h:button value="Log In" styleClass="btn btn-success" outcome="/user/userLogin.xhtml"/>
+                    </c:otherwise>
+                </c:choose>
+            </h:form>
+        </b:navbarLinks>
+
+    </b:navBar>
+
+
+    <b:container>
+        <b:row>
+            <b:column>
+                <ui:insert name="content">Default content</ui:insert>
+            </b:column>
+        </b:row>
+        <b:row>
+            <b:column styleClass="text-center">
+                <p>PG6100</p>
+            </b:column>
+        </b:row>
+    </b:container>
+
+</h:body>
+</html>

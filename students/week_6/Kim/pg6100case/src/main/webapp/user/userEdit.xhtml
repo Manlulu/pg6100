@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{userController.userId}"/>
+    <f:viewAction action="#{userController.initUser()}"/>
+</f:metadata>
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <h1>Edit #{userController.user.userName}</h1>
+        <p>Bug: Cant leave address fields blank to remove them.</p>
+        <b:row>
+            <b:column span="4">
+                <h:form>
+                    <!--<h:inputHidden value="#{newsController.news.newsId}"/><br></br>-->
+                    <p>Username</p>
+                    <b:inputText value="#{userController.user.userName}"/>
+                    <p>Password</p>
+                    <b:inputSecret value="#{userController.formPassword}" placeholder="Password"/>
+                    <p>Password again</p>
+                    <b:inputSecret value="#{userController.formPasswordConfirm}" placeholder="Confirm password"/>
+                    <br></br>
+                    <p>First name</p>
+                    <b:inputText value="#{userController.user.firstName}"/>
+                    <p>Last name</p>
+                    <b:inputText value="#{userController.user.lastName}"/>
+                    <br></br>
+                    <p>State</p>
+                    <b:inputText value="#{userController.state}"/>
+                    <p>City</p>
+                    <b:inputText value="#{userController.city}"/>
+                    <p>Street</p>
+                    <b:inputText value="#{userController.street}"/>
+
+
+                    <h:commandButton value="Update" type="submit" styleClass="btn btn-warning"
+                                     action="#{userController.updateUser()}"/>
+                </h:form>
+            </b:column>
+        </b:row>
+
+
+    </ui:define>
+</ui:composition>
+</html>
